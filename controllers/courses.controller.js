@@ -50,7 +50,7 @@ exports.findAll = (req, res) => {
   const { limit, offset } = getPagination(page, size);
   Courses.findAndCountAll({ limit, offset })
     .then((data) => {
-      const respons = getPagingData(data, page, limit);
+      const response = getPagingData(data, page, limit);
       res.send(response);
     })
     .catch((err) => {
@@ -60,6 +60,7 @@ exports.findAll = (req, res) => {
     });
 };
 
+//Find course based on a specific number
 exports.findNumber = (req, res) => {
   const { page, size } = req.query;
   const { limit, offset } = getPagination(page, size);
