@@ -24,14 +24,14 @@ module.exports = (app) => {
 
   //Buildings
   router.post("/buildings", buildings.create);
-  router.put("/buildings", buildings.update);
+  router.put("/buildings/:id", buildings.update);
   router.get("/buildings", buildings.findAll);
   router.get("/buildings/name/:name", buildings.findName);
-  router.delete("/buildings", buildings.delete);
+  router.delete("/buildings:id", buildings.delete);
 
   //Courses
   router.post("/courses", courses.create);
-  router.put("/courses", courses.update);
+  router.put("/courses/:id", courses.update);
   router.get("/courses", courses.findAll);
   router.get("/courses/description/:description", courses.findDescription);
   router.get("/courses/hours/:hours", courses.findHours);
@@ -47,31 +47,46 @@ module.exports = (app) => {
     courses.findYearAvailable
   );
   router.get("/courses/searcheverything", courses.searchEverything);
-  router.delete("/courses", courses.delete);
+  router.delete("/courses:id", courses.delete);
 
   //Events
-  router.post();
-  router.put();
-  router.get();
-  router.delete();
+  router.post("/events", events.create);
+  router.put("/events/:id", events.update);
+  router.get("/events", events.findAll);
+  router.get("/events/name/:name", events.findName);
+  router.get("/events/roomid/:roomid", events.findRoomID);
+  router.get("/events/semesterid/:semesterid", events.findSemesterID);
+  router.get("/events/userid/:userid", events.findUserID);
+  router.delete("/events:id", events.delete);
 
   //Faculty
-  router.post();
-  router.put();
-  router.get();
-  router.delete();
+  router.post("/faculty", faculty.create);
+  router.put("/faculty/:id", faculty.update);
+  router.get("/faculty", faculty.findAll);
+  router.get("/faculty/name/:name", faculty.findName);
+  router.delete("/faculty/:id", faculty.delete);
 
   //Faculty Section
-  router.post();
-  router.put();
-  router.get();
-  router.delete();
+  router.post("/facultysection", facultysection.create);
+  router.put("/facultysection:id", facultysection.update);
+  router.get("/facultysection", facultysection.findAll);
+  router.get(
+    "/facultysection/facultyid/:facultyid",
+    facultysection.findFacultyID
+  );
+  router.get(
+    "/facultysection/sectionid/:sectionid",
+    facultysection.findSectionID
+  );
+  router.delete("/facultysection/:id", facultysection.delete);
 
   //Favorites
-  router.post();
-  router.put();
-  router.get();
-  router.delete();
+  router.post("/favorites", favorites.create);
+  router.put("/favorites/:id", favorites.update);
+  router.get("/favorites", favorites.findAll);
+  router.get("/favorites/courseid/:courseid", favorites.findCourseID);
+  router.get("/favorites/userid/:userid", favorites.findUserID);
+  router.delete("/favorites/:id", favorites.delete);
 
   //Rooms
   router.post();
