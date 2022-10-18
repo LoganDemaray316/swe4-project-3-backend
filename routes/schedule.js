@@ -89,34 +89,52 @@ module.exports = (app) => {
   router.delete("/favorites/:id", favorites.delete);
 
   //Rooms
-  router.post();
-  router.put();
-  router.get();
-  router.delete();
+  router.post("/rooms", rooms.create);
+  router.put("/rooms/:id", rooms.update);
+  router.get("/rooms", rooms.findAll);
+  router.get("/rooms/buildingid/:buildingid", rooms.findBuildingID);
+  router.get("/rooms/capacity/:capacity", rooms.findCapacity);
+  router.get("/rooms/number/:number", rooms.findNumber);
+  router.delete("/rooms/:id", rooms.delete);
 
   //Sections
-  router.post();
-  router.put();
-  router.get();
-  router.delete();
+  router.post("/sections", sections.create);
+  router.put("/sections/:id", sections.update);
+  router.get("/sections", sections.findAll);
+  router.get("/sections/courseid/:courseid", sections.findCourseID);
+  router.get("/sections/semesterid/:semesterid", sections.findSemesterID);
+  router.delete("/sections/:id", sections.delete);
 
   //Section Time
-  router.post();
-  router.put();
-  router.get();
-  router.delete();
+  router.post("/sectiontime", sectiontime.create);
+  router.put("/sectiontime/:id", sectiontime.update);
+  router.get("/sectiontime", sectiontime.findAll);
+  router.get("sectiontime/daysofweek/:daysofweek", sectiontime.findDaysOfWeek);
+  router.get("/sectiontime/enddate/:enddate", sectiontime.findEndDate);
+  router.get("/sectiontime/endtime/:endtime", sectiontime.findEndTime);
+  router.get("/sectiontime/roomid/:roomid", sectiontime.findRoomID);
+  router.get("/sectiontime/sectionid/:sectionid", sectiontime.findSectionID);
+  router.get("/sectiontime/startdate/:startdate", sectiontime.findStartDate);
+  router.get("/sectiontime/starttime/:starttime", sectiontime.findStartTime);
+  router.delete("/sectiontime/:id", sectiontime.delete);
 
   //Semesters
-  router.post();
-  router.put();
-  router.get();
-  router.delete();
+  router.post("/semesters", semesters.create);
+  router.put("/semesters/:id", semesters.update);
+  router.get("/semesters", semesters.findAll);
+  router.get("/semesters/code/:code", semesters.findCode);
+  router.get("/semesters/enddate/:enddate", semesters.findEndDate);
+  router.get("/semesters/startdate/:startdate", semesters.findStartDate);
+  router.delete("/semesters/:id", semesters.delete);
 
   //Users
-  router.post();
-  router.put();
-  router.get();
-  router.delete();
+  router.post("/users", users.create);
+  router.put("/users/:id", users.update);
+  router.get("/users", users.findAll);
+  router.get("/users/email/:email", users.findEmail);
+  router.get("/users/facultyid/:facultyid", users.findFacultyID);
+  router.get("/users/role/:role", users.findRole);
+  router.delete("/users/:id", users.delete);
 
   //The route that the API uses
   app.use("/schedule-t3", router);
