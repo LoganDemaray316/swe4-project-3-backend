@@ -108,6 +108,30 @@ exports.findCourseID = (req, res) => {
     });
 };
 
+//Update a favorite using the id
+exports.update = (req, res) => {
+  const id = req.params.id;
+  Favorites.update(req.body, {
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "Favorite was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update favorite with id=${id}. Maybe favorite was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating favorite with id=" + id,
+      });
+    });
+};
+
 //Delete a favorite using the favorite id
 exports.delete = (req, res) => {
   const id = req.params.id;

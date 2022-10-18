@@ -164,6 +164,30 @@ exports.findRoomID = (req, res) => {
     });
 };
 
+//Update an event using the id
+exports.update = (req, res) => {
+  const id = req.params.id;
+  Events.update(req.body, {
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "Event was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update event with id=${id}. Maybe event was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating event with id=" + id,
+      });
+    });
+};
+
 //Delete an event using the event id
 exports.delete = (req, res) => {
   const id = req.params.id;

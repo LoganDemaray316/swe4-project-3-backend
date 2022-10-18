@@ -249,6 +249,30 @@ exports.findRoomID = (req, res) => {
     });
 };
 
+//Update a section time using the id
+exports.update = (req, res) => {
+  const id = req.params.id;
+  SectionTime.update(req.body, {
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "Section time was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update section time with id=${id}. Maybe section time was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating section time with id=" + id,
+      });
+    });
+};
+
 //Delete a section time using the id
 exports.delete = (req, res) => {
   const id = req.params.id;

@@ -136,6 +136,30 @@ exports.findBuildingID = (req, res) => {
     });
 };
 
+//Update a room using the id
+exports.update = (req, res) => {
+  const id = req.params.id;
+  Rooms.update(req.body, {
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "Room was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update room with id=${id}. Maybe room was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating room with id=" + id,
+      });
+    });
+};
+
 //Delete a room using the room id
 exports.delete = (req, res) => {
   const id = req.params.id;

@@ -80,6 +80,30 @@ exports.findName = (req, res) => {
     });
 };
 
+//Update a building using the id
+exports.update = (req, res) => {
+  const id = req.params.id;
+  Faculty.update(req.body, {
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "Faculty was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update faculty with id=${id}. Maybe faculty was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating faculty with id=" + id,
+      });
+    });
+};
+
 //Delete a faculty member using the faculty id
 exports.delete = (req, res) => {
   const id = req.params.id;
