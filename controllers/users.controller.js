@@ -136,6 +136,30 @@ exports.findRole = (req, res) => {
     });
 };
 
+//Update a user using the id
+exports.update = (req, res) => {
+  const id = req.params.id;
+  Users.update(req.body, {
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "User was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update user with id=${id}. Maybe user was not found or req.body is empty!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating user with id=" + id,
+      });
+    });
+};
+
 //Delete a user using the id
 exports.delete = (req, res) => {
   const id = req.params.id;
