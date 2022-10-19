@@ -27,7 +27,7 @@ db.sequelize
     console.log("Failed to sync db: " + err.message);
   });
 
-require("./routes/courses.routes.js")(app);
+require("./routes/schedule.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3013;
