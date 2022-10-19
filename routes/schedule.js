@@ -4,7 +4,7 @@ module.exports = (app) => {
   const courses = require("../controllers/courses.controller.js");
   const events = require("../controllers/events.controller.js");
   const faculty = require("../controllers/faculty.controller.js");
-  const facultysection = require("../controllers/facultysection.controller");
+  const facultysection = require("../controllers/facultysection.controller.js");
   const favorites = require("../controllers/favorites.controller.js");
   const rooms = require("../controllers/rooms.controller.js");
   const sections = require("../controllers/sections.controller.js");
