@@ -1,7 +1,7 @@
 const { SqlError } = require("mariadb");
 
 module.exports = (sequelize, Sequelize) => {
-  const Sections = sequelize.deifine(
+  const Sections = sequelize.define(
     "sections",
     {
       courseID: {
