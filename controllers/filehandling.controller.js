@@ -1,11 +1,8 @@
 function parseFile(file) {
   const data = $.csv.toObjects(file);
   let buildings = [];
-  let course = [];
-  let events = [];
   let faculties = [];
   let facultysections = [];
-  let favorites = [];
   let rooms = [];
   let sections = [];
   let sectiontimes = [];
@@ -17,6 +14,8 @@ function parseFile(file) {
     delete data[i]["Synonym"];
     delete data[i]["UG/GR"];
     delete data[i]["Section Number"];
+    delete data[i]["Crs Level"];
+    delete data[i]["Section Title"];
     delete data[i]["Course Type"];
     delete data[i]["Reg Restrictions"];
     delete data[i]["Faculty Name (LFM)"];
@@ -25,6 +24,7 @@ function parseFile(file) {
     delete data[i]["Meeting Start Date"];
     delete data[i]["Sec End Date"];
     delete data[i]["Meeting End Date"];
+    delete data[i]["Academic Year"];
     delete data[i]["Sec Num Of"];
     delete data[i]["Min Cred"];
     delete data[i]["Max Cred"];
