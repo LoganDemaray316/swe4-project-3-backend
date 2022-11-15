@@ -1,15 +1,17 @@
 const { SqlError } = require("mariadb");
+const Users = require("./users.model");
+const Courses = require("./courses.model");
 
 module.exports = (sequelize, Sequelize) => {
   const Favorites = sequelize.define(
     "favorites",
     {
-      userID: {
+      /*userID: {
         type: Sequelize.INTEGER,
       },
       courseID: {
         type: Sequelize.INTEGER,
-      },
+      },*/
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -17,5 +19,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     { timestamps: false }
   );
+
   return Favorites;
 };

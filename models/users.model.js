@@ -4,9 +4,9 @@ module.exports = (sequelize, Sequelize) => {
   const Users = sequelize.define(
     "users",
     {
-      facultyID: {
+      /*facultyID: {
         type: Sequelize.INTEGER,
-      },
+      },*/
       email: {
         type: Sequelize.STRING,
       },

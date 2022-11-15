@@ -1,15 +1,17 @@
 const { SqlError } = require("mariadb");
+const Courses = require("./courses.model");
+const Semesters = require("./semesters.model");
 
 module.exports = (sequelize, Sequelize) => {
   const Sections = sequelize.define(
     "sections",
     {
-      courseID: {
+      /*courseID: {
         type: Sequelize.INTEGER,
       },
       semesterID: {
         type: Sequelize.INTEGER,
-      },
+      },*/
       number: {
         type: Sequelize.STRING,
       },

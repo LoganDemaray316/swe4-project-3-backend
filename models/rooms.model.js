@@ -1,4 +1,5 @@
 const { SqlError } = require("mariadb");
+const Buildings = require("./buildings.model");
 
 module.exports = (sequelize, Sequelize) => {
   const Rooms = sequelize.define(
@@ -14,11 +15,12 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         primaryKey: true,
       },
-      buildingID: {
+      /*      buildingID: {
         type: Sequelize.INTEGER,
-      },
+      },*/
     },
     { timestamps: false }
   );
+
   return Rooms;
 };

@@ -1,12 +1,12 @@
 function parseFile(file) {
   const data = $.csv.toObjects(file);
-  let buildings = [];
-  let faculties = [];
-  let facultysections = [];
-  let rooms = [];
-  let sections = [];
-  let sectiontimes = [];
-  let semesters = [];
+  let buildings = [{}];
+  let faculties = [{}];
+  let facultysections = [{}];
+  let rooms = [{}];
+  let sections = [{}];
+  let sectiontimes = [{}];
+  let semesters = [{}];
 
   for (let i = 0; i < data.length; i++) {
     delete data[i]["Synonym"];
@@ -52,17 +52,47 @@ function parseFile(file) {
   }
 
   for (let i = 0; i < data.length; i++) {
-    if (!buildings.includes(data[i]["Bldg"])) {
-      buildings.push(data[i]["Bldg"]);
+    let temp = {};
+    if (!buildings.some((e) => e.name === data[i]["Bldg"])) {
+      temp.name = data[i]["Bldg"];
+    }
+    if (!temp === {}) {
+      buildings.push(temp);
+      temp = {};
     }
     if (
-      !faculties.includes(data[i]["Faculty First"] + data[i]["Faculty Last"])
+      !faculties.some(
+        (e) => e.name === data[i]["Faculty First"] + data[i]["Faculty Last"]
+      )
     ) {
-      faculties.push(data[i]["Faculty First"] + data[i]["Faculty Last"]);
+      temp.name = data[i]["Faculty First"] + data[i]["Faculty Last"];
     }
-    if (!semesters.includes(data[i]["Term"])) {
-      semesters.push(data[i]["Term"]);
+    if (!temp === {}) {
+      faculties.push(temp);
+      temp = {};
     }
-    // check for the start and end time for the semester
+    if (!semesters.some((e) => e.code === data[i]["Term"])) {
+      temp.code = data[i]["Term"];
+    }
+    if (semesters.some((e) => e.startDate === data[i]["Start Date"])) {
+      //Do nothing, that value is already there
+    } else if (semesters.forEach((e) => e.startDate > data[i]["Start Date"])) {
+      let x = semesters.findIndex((e) => e.startDate > data[i]["Start Date"]);
+      semesters[x].startDate = data[i]["Start Date"];
+    } else {
+      temp.startDate = data[i]["Start Date"];
+    }
+    if (semesters.some((e) => e.endDate === data[i]["End Date"])) {
+      //Do nothing, that value is already there
+    } else if (semesters.forEach((e) => e.endDate < data[i]["End Date"])) {
+      let x = semesters.findIndex((e) => e.endDate < data[i]["End Date"]);
+      semesters[x].endDate = data[i]["End Date"];
+    } else {
+      temp.endDate = data[i]["End Date"];
+    }
+    if (!temp === {}) {
+      semesters.push(temp);
+      temp = {};
+    }
   }
 }
