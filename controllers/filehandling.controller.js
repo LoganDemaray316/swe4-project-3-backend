@@ -7,8 +7,6 @@ function parseFile(file) {
   let sections = [];
   let sectiontimes = [];
   let semesters = [];
-  let sessions = [];
-  let users = [];
 
   for (let i = 0; i < data.length; i++) {
     delete data[i]["Synonym"];
@@ -57,5 +55,14 @@ function parseFile(file) {
     if (!buildings.includes(data[i]["Bldg"])) {
       buildings.push(data[i]["Bldg"]);
     }
+    if (
+      !faculties.includes(data[i]["Faculty First"] + data[i]["Faculty Last"])
+    ) {
+      faculties.push(data[i]["Faculty First"] + data[i]["Faculty Last"]);
+    }
+    if (!semesters.includes(data[i]["Term"])) {
+      semesters.push(data[i]["Term"]);
+    }
+    // check for the start and end time for the semester
   }
 }
