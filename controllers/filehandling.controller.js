@@ -1,8 +1,6 @@
 function parseFile(file) {
   const data = $.csv.toObjects(file);
   let buildings = [];
-  let faculties = [];
-  let facultysections = [];
   let rooms = [];
   let sections = [];
   let sectiontimes = [];
