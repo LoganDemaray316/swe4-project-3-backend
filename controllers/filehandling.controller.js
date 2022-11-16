@@ -8,81 +8,36 @@ const Sections = db.sections;
 const SectionTime = db.sectiontime;
 const Semesters = db.semesters;
 
-function parseFile(file) {
-  const data = $.csv.toObjects(file);
-
-  for (let i = 0; i < data.length; i++) {
-    delete data[i]["Synonym"];
-    delete data[i]["UG/GR"];
-    delete data[i]["Section Number"];
-    delete data[i]["Crs Level"];
-    delete data[i]["Section Title"];
-    delete data[i]["Course Type"];
-    delete data[i]["Reg Restrictions"];
-    delete data[i]["Faculty Name (LFM)"];
-    delete data[i]["Faculty Name 2 (LFM)"];
-    delete data[i]["Sec Start Date"];
-    delete data[i]["Meeting Start Date"];
-    delete data[i]["Sec End Date"];
-    delete data[i]["Meeting End Date"];
-    delete data[i]["Academic Year"];
-    delete data[i]["Sec Num Of"];
-    delete data[i]["Min Cred"];
-    delete data[i]["Max Cred"];
-    delete data[i]["Enr Count"];
-    delete data[i]["Wait"];
-    delete data[i]["Depts"];
-    delete data[i]["Divisions"];
-    delete data[i]["College"];
-    delete data[i]["Instr Method"];
-    delete data[i]["Sun"];
-    delete data[i]["Mon"];
-    delete data[i]["Tue"];
-    delete data[i]["Wed"];
-    delete data[i]["Thu"];
-    delete data[i]["Fri"];
-    delete data[i]["Sat"];
-    delete data[i]["SEC.XLIST"];
-    delete data[i]["SEC.FEE"];
-    delete data[i]["SEC.COMMENTS"];
-    delete data[i]["SEC.PRINTED.COMMENTS"];
-    delete data[i]["Primary Section"];
-    delete data[i]["Term Sort No"];
-    delete data[i]["Only Pass/NoPass"];
-    delete data[i]["Allow Pass/NoPass"];
-    delete data[i]["Start Time 24hr"];
-    delete data[i]["End Time 24hr"];
-  }
+exports.parseFile = async (req, res) => {
+  let data = [];
+  await req.params.import;
+  data = req.params.import;
+  console.log("START");
+  console.log("Data:" + data);
 
   for (let i = 0; i < data.length; i++) {
     let temp = {};
-
+    console.log(temp);
     temp.name = data[i]["Bldg"];
-
-    if (!temp === {}) {
-      Buildings.create(temp);
-      temp = {};
-    }
+    Buildings.create(temp);
+    console.log(temp);
+    temp = {};
     temp.name = data[i]["Faculty First"] + " " + data[i]["Faculty Last"];
-    if (!temp === {}) {
-      Faculty.create(temp);
-      temp = {};
-    }
+    Faculty.create(temp);
+    console.log(temp);
+    temp = {};
     temp.code = data[i]["Term"];
     temp.startDate = data[i]["Start Date"];
     temp.endDate = data[i]["End Date"];
-    if (!temp === {}) {
-      Semesters.create(temp);
-      temp = {};
-    }
+    Semesters.create(temp);
+    console.log(temp);
+    temp = {};
     temp.room = data[i]["Rooms"];
     temp.buildingId = sequelize.query(
       `select id from buildings where name like ${data[i]["Bldg"]}`
     );
-    if (!temp === {}) {
-      Rooms.create(temp);
-      temp = {};
-    }
+    Rooms.create(temp);
+    console.log(temp);
     temp = {};
     temp.number =
       data[i]["Subject"] +
@@ -99,10 +54,9 @@ function parseFile(file) {
     temp.semesterId = sequelize.query(
       `select id from semesters where code like ${data[i]["Term"]}`
     );
-    if (!temp === {}) {
-      Sections.create(temp);
-      temp = {};
-    }
+    Sections.create(temp);
+    console.log(temp);
+    temp = {};
     temp = {};
     temp.sectionId = sequelize.query(
       `select id from sections where number like ${
@@ -126,9 +80,10 @@ function parseFile(file) {
         data[i]["Faculty First"] + " " + data[i]["Faculty Last"]
       }`
     );
-    if (!temp === {}) {
-      SectionTime.create(temp);
-      temp = {};
-    }
+    SectionTime.create(temp);
+    console.log(temp);
+    temp = {};
   }
-}
+  console.log("END");
+  res.status(200).send({});
+};
