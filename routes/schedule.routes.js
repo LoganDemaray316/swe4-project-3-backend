@@ -12,6 +12,7 @@ module.exports = (app) => {
   const semesters = require("../controllers/semesters.controller.js");
   const users = require("../controllers/users.controller.js");
   const auth = require("../controllers/auth.controller.js");
+  const importFile = require("../controllers/filehandling.controller.js");
   const { authenticate } = require("../authorization/authorization.js");
 
   var router = require("express").Router();
@@ -32,6 +33,9 @@ module.exports = (app) => {
 
   // Logout
   router.post("/logout", auth.logout);
+
+  // File Import
+  router.post("/import", [authenticate], fileImport.parseFile(data));
 
   //Buildings
   router.post("/buildings", [authenticate], buildings.create);
