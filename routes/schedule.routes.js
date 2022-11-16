@@ -11,6 +11,7 @@ module.exports = (app) => {
   const sectiontime = require("../controllers/sectiontime.controller.js");
   const semesters = require("../controllers/semesters.controller.js");
   const users = require("../controllers/users.controller.js");
+  const auth = require("../controllers/auth.controller.js");
   const { authenticate } = require("../authorization/authorization.js");
 
   var router = require("express").Router();
@@ -22,6 +23,15 @@ module.exports = (app) => {
   router.get();
   router.delete();
   */
+
+  // Login
+  router.post("/login", auth.login);
+
+  // Authorization
+  router.post("/authorize/:id", auth.authorize);
+
+  // Logout
+  router.post("/logout", auth.logout);
 
   //Buildings
   router.post("/buildings", [authenticate], buildings.create);

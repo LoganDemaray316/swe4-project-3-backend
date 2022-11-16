@@ -1,6 +1,6 @@
 const db = require("../models");
 const authconfig = require("../config/auth.config");
-const User = db.user;
+const User = db.users;
 const Session = db.session;
 
 const { google } = require("googleapis");
@@ -68,6 +68,7 @@ exports.login = async (req, res) => {
         // res.send({ message: "User was registered successfully!" });
       })
       .catch((err) => {
+        console.log(err);
         res.status(500).send({ message: err.message });
       });
   } else {
