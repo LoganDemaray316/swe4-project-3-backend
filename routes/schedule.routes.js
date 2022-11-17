@@ -14,7 +14,8 @@ module.exports = (app) => {
   const auth = require("../controllers/auth.controller.js");
   const { authenticate } = require("../authorization/authorization.js");
 
-  const fileimport = require("../controllers/filehandling.controller.js");
+  const fileImport = require("../controllers/filehandling.controller.js");
+  const upload = require("../filehandling/fileUploader.js");
 
   var router = require("express").Router();
 
@@ -36,7 +37,12 @@ module.exports = (app) => {
   router.post("/logout", auth.logout);
 
   // File Import
-  router.get("/import/:import", [authenticate], fileimport.parseFile);
+  router.post(
+    "/import/sections",
+    upload.single("file"),
+    fileImport.sectionFile
+  );
+  router.post("/import/courses", upload.single("file"), fileImport.courseFile);
 
   //Buildings
   router.post("/buildings", [authenticate], buildings.create);

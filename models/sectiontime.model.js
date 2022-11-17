@@ -23,13 +23,15 @@ module.exports = (sequelize, Sequelize) => {
       },
       daysOfWeek: {
         type: Sequelize.STRING,
-      },
-      /*roomID: {
+      } /*
+      roomID: {
         type: Sequelize.INTEGER,
-      },*/
+      },*/,
       id: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
+        unique: true,
       },
     },
     { timestamps: false }

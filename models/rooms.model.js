@@ -11,13 +11,15 @@ module.exports = (sequelize, Sequelize) => {
       capacity: {
         type: Sequelize.INTEGER,
       },
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-      },
       /*      buildingID: {
         type: Sequelize.INTEGER,
       },*/
+      id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        unique: true,
+      },
     },
     { timestamps: false }
   );

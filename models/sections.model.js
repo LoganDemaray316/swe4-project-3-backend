@@ -6,7 +6,8 @@ module.exports = (sequelize, Sequelize) => {
   const Sections = sequelize.define(
     "sections",
     {
-      /*courseID: {
+      /*
+      courseID: {
         type: Sequelize.INTEGER,
       },
       semesterID: {
@@ -20,7 +21,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       id: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
+        unique: true,
       },
     },
     { timestamps: false }
