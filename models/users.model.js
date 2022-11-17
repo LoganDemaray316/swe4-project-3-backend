@@ -4,9 +4,9 @@ module.exports = (sequelize, Sequelize) => {
   const Users = sequelize.define(
     "users",
     {
-      facultyID: {
+      /*facultyID: {
         type: Sequelize.INTEGER,
-      },
+      },*/
       email: {
         type: Sequelize.STRING,
       },
@@ -17,6 +17,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        unique: true,
       },
       fName: {
         type: Sequelize.STRING,

@@ -1,27 +1,33 @@
 const { SqlError } = require("mariadb");
+const Semesters = require("./semesters.model");
+const Users = require("./users.model");
+const Rooms = require("./rooms.model");
 
 module.exports = (sequelize, Sequelize) => {
   const Events = sequelize.define(
     "events",
     {
-      semesterID: {
+      /*semesterID: {
         type: Sequelize.INTEGER,
       },
       userID: {
         type: Sequelize.INTEGER,
-      },
+      },*/
       name: {
         type: Sequelize.STRING,
       },
-      roomID: {
+      /*roomID: {
         type: Sequelize.INTEGER,
-      },
+      },*/
       id: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
+        unique: true,
       },
     },
     { timestamps: false }
   );
+
   return Events;
 };

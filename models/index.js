@@ -1,5 +1,6 @@
 const dbConfig = require("../config/db.config.js");
 const Sequelize = require("sequelize");
+const { addForeignKeys } = require("./foreignkeys.js");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.DIALECT,
@@ -11,6 +12,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.POOL.idle,
   },
 });
+
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -26,4 +28,8 @@ db.sectiontime = require("./sectiontime.model.js")(sequelize, Sequelize);
 db.semesters = require("./semesters.model.js")(sequelize, Sequelize);
 db.session = require("./session.model.js")(sequelize, Sequelize);
 db.users = require("./users.model.js")(sequelize, Sequelize);
+
+// Add Foreign Keys
+addForeignKeys(db);
+
 module.exports = db;

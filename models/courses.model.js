@@ -27,7 +27,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       id: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
+        unique: true,
       },
     },
     { timestamps: false }
